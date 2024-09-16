@@ -1,0 +1,22 @@
+models:
+  Client:
+    name: string
+    email: string unique
+    relationships:
+      hasMany: Project
+  Project:
+    name: string
+    client_id: unsignedInteger foreign
+    max_hours: unsignedInteger nullable
+    relationships:
+      belongsTo: Client
+      hasMany: TimeLog
+      belongsToMany: User
+  TimeLog:
+    user_id: unsignedInteger foreign
+    project_id: unsignedInteger foreign
+    start_time: datetime
+    stop_time: datetime
+    description: text
+    relationships:
+      belongsTo: User, Project
